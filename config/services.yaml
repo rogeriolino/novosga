@@ -74,7 +74,10 @@ services:
         resource: '../vendor/novosga/core/Service'
         public: true
         
-    Novosga\Event\EventDispatcherInterface: '@App\Service\EventDispatcher'
+    #Symfony\Component\EventDispatcher\EventDispatcher: 
+    Novosga\Event\EventDispatcherInterface: '@App\Event\EventDispatcher'
+    Novosga\Event\TicketPlacedEventInterface: '@App\Event\TicketPlacedEvent'
+    Novosga\Event\ContextInterface: '@App\Event\Context'
         
     Novosga\Infrastructure\StorageInterface:
         factory: 'App\Infrastructure\StorageFactory:createStorage'

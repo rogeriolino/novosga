@@ -20,6 +20,8 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Novosga\Http\Envelope;
 use function usort;
+use Symfony\Component\Mercure\Publisher;
+use Symfony\Component\Mercure\Update;
 
 class DefaultController extends AbstractController
 {
@@ -34,8 +36,16 @@ class DefaultController extends AbstractController
     /**
      * @Route("/about", name="about")
      */
-    public function about(Request $request)
+    public function about(Request $request, Publisher $publisher)
     {
+        $update = new Update(
+            '/painel/1',
+            json_encode(['status' => 'OutOfStock'])
+        );
+
+        // The Publisher service is an invokable object
+        $publisher($update);
+        
         return $this->render('default/about.html.twig');
     }
 

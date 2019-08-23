@@ -6,6 +6,11 @@
  */
 
 return [
+    'hooks' => [
+        \Novosga\Event\TicketPlacedEventInterface::class => function (\Novosga\Event\TicketPlacedEventInterface $evt) {
+            // dd('asdf');
+        }
+    ],
     'queue' => [
         /**
          * Queue ordering

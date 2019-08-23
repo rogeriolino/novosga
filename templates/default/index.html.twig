@@ -22,3 +22,24 @@
         }
     </style>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        const topics = ['/painel/{id}'];
+        App.SSE.connect(topics);
+        App.SSE.onopen = () => {
+            console.log('open');
+        }
+        App.SSE.onerror = () => {
+            console.log('error');
+        }
+        App.SSE.onmessage = (e, data) => {
+            console.log('message', data);
+        }
+        App.SSE.ondisconnect = () => {
+            console.log('disconnected, do some stuff and try reconnect it');
+            App.SSE.connect(topics);
+        }
+    </script>
+{% endblock %}

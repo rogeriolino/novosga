@@ -255,8 +255,7 @@ var App = {
         reconnectTimeout: 2000,
         
         connect (topics) {
-            // const url = new URL(location.protocol + '//' + location.hostname + ':3000/hub');
-            const url = new URL('http://mercure.teste.pmv.local/hub');
+            const url = new URL(location.protocol + '//' + location.hostname + ':3000/hub');
             for (let topic of topics) {
                 url.searchParams.append('topic', topic);
             }
